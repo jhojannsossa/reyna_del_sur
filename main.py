@@ -10,35 +10,35 @@ class Personaje:
 
     def entrenar(self):
         self.valor += 15
-        self.mostrar_estado()
+        self.actualizar_estado()
 
     def descansar(self):
         self.valor = max(0, self.valor - 10)
-        self.mostrar_estado()
+        self.actualizar_estado()
 
-    def mostrar_estado(self):
+    def actualizar_estado(self):
         self.estado.config(
             text=f"{self.atributo}: {self.valor}"
         )
 
 
 class TeresaMendoza(Personaje):
-    def __init__(self, padre):
+    def __init__(self, ventana):
         super().__init__("Teresa Mendoza", "Energía", 100)
-        self.crear_panel(padre, "👩🏻‍🦱", "#f8dce5")
+        self.crear_panel(ventana, "👩🏻‍🦱", "#f8dce5")
 
-    def crear_panel(self, padre, dibujo, color):
-        self.panel = tk.Frame(padre, bg=color, padx=20, pady=15)
+    def crear_panel(self, ventana, dibujo, color):
+        self.panel = tk.Frame(ventana, bg=color, padx=20, pady=15)
         self.panel.pack(side="left", padx=10, pady=10)
 
         tk.Label(
             self.panel, text=dibujo,
-            font=("Segoe UI Emoji", 65), bg=color
+            font=("Segoe UI Emoji", 60), bg=color
         ).pack()
 
         tk.Label(
             self.panel, text=self.nombre,
-            font=("Arial", 15, "bold"), bg=color
+            font=("Arial", 14, "bold"), bg=color
         ).pack()
 
         self.estado = tk.Label(
@@ -59,22 +59,22 @@ class TeresaMendoza(Personaje):
 
 
 class EpifanioVargas(Personaje):
-    def __init__(self, padre):
+    def __init__(self, ventana):
         super().__init__("Epifanio Vargas", "Fuerza", 100)
-        self.crear_panel(padre, "🤠", "#d9eaff")
+        self.crear_panel(ventana, "🤠", "#d9eaff")
 
-    def crear_panel(self, padre, dibujo, color):
-        self.panel = tk.Frame(padre, bg=color, padx=20, pady=15)
+    def crear_panel(self, ventana, dibujo, color):
+        self.panel = tk.Frame(ventana, bg=color, padx=20, pady=15)
         self.panel.pack(side="left", padx=10, pady=10)
 
         tk.Label(
             self.panel, text=dibujo,
-            font=("Segoe UI Emoji", 65), bg=color
+            font=("Segoe UI Emoji", 60), bg=color
         ).pack()
 
         tk.Label(
             self.panel, text=self.nombre,
-            font=("Arial", 15, "bold"), bg=color
+            font=("Arial", 14, "bold"), bg=color
         ).pack()
 
         self.estado = tk.Label(
@@ -96,28 +96,29 @@ class EpifanioVargas(Personaje):
 
 def main():
     ventana = tk.Tk()
-    ventana.title("La Reina del Sur - Proyecto Python")
-    ventana.geometry("600x390")
+    ventana.title("La Reina del Sur")
+    ventana.geometry("600x360")
     ventana.configure(bg="#18263d")
 
     tk.Label(
-        ventana,
-        text="LA REINA DEL SUR",
+        ventana, text="LA REINA DEL SUR",
         font=("Arial", 22, "bold"),
         bg="#18263d", fg="white"
     ).pack(pady=15)
 
-    zona = tk.Frame(ventana, bg="#18263d")
-    zona.pack()
+    personajes = tk.Frame(ventana, bg="#18263d")
+    personajes.pack()
 
-    TeresaMendoza(zona)
-    EpifanioVargas(zona)
+    TeresaMendoza(personajes)
+    EpifanioVargas(personajes)
 
     tk.Label(
-        ventana,
-        text="Programación Orientada a Objetos",
-        bg="#18263d", fg="white",
-        font=("Arial", 10)
-    ).pack(pady=10)
+        ventana, text="Programación Orientada a Objetos",
+        bg="#18263d", fg="white"
+    ).pack(pady=8)
 
     ventana.mainloop()
+
+
+if __name__ == "__main__":
+    main()
