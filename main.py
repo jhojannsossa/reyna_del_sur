@@ -71,14 +71,17 @@ class EpifanioVargas(Personaje):
         self.panel = tk.Frame(ventana, bg=color, padx=20, pady=15)
         self.panel.pack(side="left", padx=10, pady=10)
 
-        tk.Label(
-            self.panel, text=dibujo,
-            font=("Segoe UI Emoji", 60), bg=color
-        ).pack()
+        ruta = Path(__file__).parent / "imagenes" / "epifanio.jpg"
+
+        imagen = Image.open(ruta)
+        imagen.thumbnail((180, 200))
+
+        self.foto = ImageTk.PhotoImage(imagen)
 
         tk.Label(
-            self.panel, text=self.nombre,
-            font=("Arial", 14, "bold"), bg=color
+            self.panel,
+            image=self.foto,
+            bg=color
         ).pack()
 
         self.estado = tk.Label(
